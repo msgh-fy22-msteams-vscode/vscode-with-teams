@@ -1,10 +1,13 @@
-import { StatusBarAlignment, StatusBarItem, ViewColumn, WebviewPanel, window } from 'vscode';
+import { StatusBarAlignment, StatusBarItem, Uri, ViewColumn, WebviewPanel, window } from 'vscode';
+import { join } from 'path';
 import { OPEN_CHAT_COMMAND, SHOW_MENU_ITEM_COMMAND } from './contants';
 
 export default class TeamsChat {
   private _statusBarItem: StatusBarItem;
+  private _extensionPath: string;
 
-  constructor() {
+  constructor(extensionPath: string) {
+    this._extensionPath = extensionPath;
     this._statusBarItem = window.createStatusBarItem(StatusBarAlignment.Right, 100);
     this._statusBarItem.command = SHOW_MENU_ITEM_COMMAND;
     this._statusBarItem.text = '🌐 Hello World from VS Code';
@@ -16,17 +19,36 @@ export default class TeamsChat {
   }
 
   openTeamsChatView() {
-    const panel: WebviewPanel = window.createWebviewPanel('showTeamsChat', 'Microsoft Teams', ViewColumn.Two, {});
+    const panel: WebviewPanel = window.createWebviewPanel('showTeamsChat', 'Microsoft Teams', ViewColumn.Two, {
+      enableScripts: true,
+
+      localResourceRoots: [Uri.file(join(this._extensionPath, 'teamsChatViewer'))],
+    });
+
+    const reactAppPathOnDisk = Uri.file(join(this._extensionPath, 'teamsChatViewer', 'teamsChatViewer.js'));
+    const reactAppUri = reactAppPathOnDisk.with({ scheme: 'vscode-resource' });
+
     panel.webview.html = `<!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Config View</title>
+
+        <meta http-equiv="Content-Security-Policy"
+              content="default-src 'none';
+                      img-src https:;
+                      script-src 'unsafe-eval' 'unsafe-inline' vscode-resource:;
+                      style-src vscode-resource: 'unsafe-inline';">
+
+        <script>
+          window.acquireVsCodeApi = acquireVsCodeApi;
+        </script>
     </head>
     <body>
-        <img src="https://media.giphy.com/media/uoAn5ik8zAuqI/giphy.gif" width="300" /><br/>
-        <code>Hello World</code>
+        <div id="root"></div>
+
+        <script src="${reactAppUri}"></script>
     </body>
     </html>`;
   }

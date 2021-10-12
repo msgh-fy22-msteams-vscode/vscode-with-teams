@@ -6,7 +6,7 @@ import { SHOW_MENU_ITEM_COMMAND } from './contants';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
-export function activate(context: ExtensionContext) {
+export function activate({ extensionPath, subscriptions }: ExtensionContext) {
   // Use the console to output diagnostic information (console.log) and errors (console.error)
   // This line of code will only be executed once when your extension is activated
   console.log('Congratulations, your extension "vscode-with-teams" is now active!');
@@ -20,12 +20,12 @@ export function activate(context: ExtensionContext) {
     window.showInformationMessage('Hello World from VSCode with Teams!');
   });
 
-  const teamsChat: TeamsChat = new TeamsChat();
+  const teamsChat: TeamsChat = new TeamsChat(extensionPath);
 
-  context.subscriptions.push(
+  subscriptions.push(
     disposable,
     teamsChat.statusBarItem,
-    commands.registerCommand(SHOW_MENU_ITEM_COMMAND, () => teamsChat.updateStatusBarItemIcon()),
+    commands.registerCommand(SHOW_MENU_ITEM_COMMAND, () => teamsChat.openTeamsChatView()),
   );
 }
 
