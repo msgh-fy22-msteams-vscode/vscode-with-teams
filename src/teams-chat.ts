@@ -8,9 +8,9 @@ export default class TeamsChat {
 
   constructor(extensionPath: string) {
     this._extensionPath = extensionPath;
-    this._statusBarItem = window.createStatusBarItem(StatusBarAlignment.Right, 100);
+    this._statusBarItem = window.createStatusBarItem(StatusBarAlignment.Right, 1000);
     this._statusBarItem.command = SHOW_MENU_ITEM_COMMAND;
-    this._statusBarItem.text = '🌐 Hello World from VS Code';
+    this._statusBarItem.text = '🌐 VS Code with Teams';
     this._statusBarItem.show();
   }
 
