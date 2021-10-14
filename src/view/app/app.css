@@ -1,0 +1,12 @@
+.chat-box {
+  border: 2px solid gray;
+  border-bottom: 5px solid transparent;
+}
+
+.chat-box:focus {
+  border-bottom: 5px solid mediumpurple;
+}
+
+.submit-button {
+  border: none;
+}

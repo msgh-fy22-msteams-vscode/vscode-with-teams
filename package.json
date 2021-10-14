@@ -53,6 +53,8 @@
 		"webpack-cli": "^4.9.0"
 	},
 	"dependencies": {
+		"@fluentui/docs-components": "^0.59.0",
+		"@fluentui/react-icons": "^1.1.144",
 		"@fluentui/react-icons-northstar": "^0.59.0",
 		"@fluentui/react-northstar": "^0.59.0",
 		"@types/react": "^17.0.29",

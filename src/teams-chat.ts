@@ -30,13 +30,13 @@ export default class TeamsChat {
 
     panel.webview.html = `<!DOCTYPE html>
     <html lang="en">
-    <head>
+      <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Config View</title>
 
         <meta http-equiv="Content-Security-Policy"
-              content="default-src 'none';
+              content="default-src 'none' https://random-data-api.com/;
                       img-src https:;
                       script-src 'unsafe-eval' 'unsafe-inline' vscode-resource:;
                       style-src vscode-resource: 'unsafe-inline';">
@@ -44,12 +44,11 @@ export default class TeamsChat {
         <script>
           window.acquireVsCodeApi = acquireVsCodeApi;
         </script>
-    </head>
-    <body>
+      </head>
+      <body>
         <div id="root"></div>
-
         <script src="${reactAppUri}"></script>
-    </body>
+      </body>
     </html>`;
   }
 }
