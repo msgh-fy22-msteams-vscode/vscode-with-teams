@@ -36,7 +36,7 @@ export default class TeamsChat {
         <title>Config View</title>
 
         <meta http-equiv="Content-Security-Policy"
-              content="default-src 'none' https://random-data-api.com/;
+              content="default-src https://random-data-api.com/;
                       img-src https:;
                       script-src 'unsafe-eval' 'unsafe-inline' vscode-resource:;
                       style-src vscode-resource: 'unsafe-inline';">

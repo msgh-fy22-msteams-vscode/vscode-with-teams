@@ -1,12 +1,29 @@
+#root {
+  padding-bottom: 5rem;
+}
+
+#root textarea~.submit-button,
 .chat-box {
-  border: 2px solid gray;
+  position: fixed;
+  overflow: hidden;
+}
+
+.chat-box {
+  border       : 2px solid gray;
   border-bottom: 5px solid transparent;
+  width        : 100%;
+  bottom       : 0px;
 }
 
 .chat-box:focus {
   border-bottom: 5px solid mediumpurple;
 }
 
-.submit-button {
-  border: none;
+#root textarea~.submit-button {
+  border    : none;
+  right     : 0;
+  position  : fixed;
+  border    : none;
+  background: transparent;
+  bottom    : .5rem;
 }
