@@ -63,8 +63,10 @@ const chatContent = () => {
   };
 
   const submitMessageClick = (e: any) => {
-    e.preventDefault();
-    submitMessage();
+    if (e.targe.value.length){
+      e.preventDefault();
+      submitMessage();
+    }
   };
 
   return <>
